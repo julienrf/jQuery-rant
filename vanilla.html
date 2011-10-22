@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <div class="item-list-widget">
+      <button class="add-item" type="button">Add</button>
+      <ul class="item-list"></ul>
+      <button class="next" type="button">Next</button>
+    </div>
+    <div class="item-list-widget">
+      <button class="add-item" type="button">Add</button>
+      <ul class="item-list"></ul>
+      <button class="next" type="button">Next</button>
+    </div>
+    <script>
+      (function () {
+        var ws = document.querySelectorAll('.item-list-widget');
+        for (var i = 0 ; i < ws.length ; i++) {
+          setup(Widget(ws[i]));
+        }
+        function Widget(elt) {
+          return {
+            add: elt.querySelector('.add-item'),
+            next: elt.querySelector('.next'),
+            list: elt.querySelector('.item-list')
+          };
+        }
+        function setup(widget) {
+          widget.next.disabled = true;
+
+          widget.add.onclick = function () {
+            var item = document.createElement('li');
+            item.textContent = 'item';
+            widget.list.appendChild(item);
+
+            if (widget.list.childNodes.length >= 3) {
+              widget.next.disabled = false;
+            }
+
+            return false;
+          }
+        }
+      })();
+    </script>
+    <script src="benchmark.js"></script>
+  </body>
+</html>

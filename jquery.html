@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="item-list-widget">
+      <button class="add-item" type="button">Add</button>
+      <ul class="item-list"></ul>
+      <button class="next" type="button">Next</button>
+    </div>
+    <div class="item-list-widget">
+      <button class="add-item" type="button">Add</button>
+      <ul class="item-list"></ul>
+      <button class="next" type="button">Next</button>
+    </div>
+    <script>
+      $(function () {
+        $('.item-list-widget').each(function () {
+          var $this = $(this);
+
+          var $next = $this.find('.next');
+          $next.attr('disabled', 'disabled'); // At startup the 'next' button is disabled
+
+          $this.find('.add-item').click(function () {
+            $this.find('ul').append('<li>item</li>');
+
+            // Enable the 'next' button if at least 3 items have been added
+            if ($this.find('ul li').length >= 3) {
+              $next.removeAttr('disabled');
+            }
+         });
+      });
+    });
+    </script>
+    <script src="benchmark.js"></script>
+  </body>
+</html>
